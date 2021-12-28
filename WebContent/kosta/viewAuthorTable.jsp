@@ -13,15 +13,16 @@
 	ResultSet rs=null;
 	int cnt=0;
 	String url="jdbc:oracle:thin:@192.168.3.52:1521:xe";
-	String user="hr";
-	String pass="hr";
+	String user="webdb";
+	String pass="webdb";
 
-	String sql="select e.employee_id, e.first_name, " 
+/* 	String sql="select e.employee_id, e.first_name, " 
 			+ "to_char(e.hire_date,'yyyy-mm-dd') hire_date, "
 			+ "d.department_name,mng.first_name manager, e.salary "
 			+ "from employees e, employees mng, departments d "
 			+ "where e.department_id = d.department_id "
-			+ "and e.manager_id = mng.employee_id";
+			+ "and e.manager_id = mng.employee_id"; */
+	String sql="select author_id, author_name, author_desc from author";
 %>
 <!DOCTYPE html>
 <html>
@@ -36,13 +37,19 @@ table {
 </head>
 <body>
 <table width="800" border="1">
-	<tr>
+<!-- 	<tr>
 		<th>번호</th>
 		<th>이름</th>
 		<th>날짜</th>
 		<th>부서이름</th>
 		<th>매니저이름</th>
 		<th>월급</th>
+	</tr>
+-->
+	<tr>
+		<th>번호</th>
+		<th>작가이름</th>
+		<th>작가설명</th>
 	</tr>
 	<%
 		try{
@@ -54,12 +61,9 @@ table {
 			while(rs.next()){
 				cnt++;
 				out.print("<tr>");
-				out.print("<td>"+rs.getInt("employee_id")+"</td>");
-				out.print("<td>"+rs.getString("first_name")+"</td>");
-				out.print("<td>"+rs.getString("hire_date")+"</td>");
-				out.print("<td>"+rs.getString("department_name")+"</td>");
-				out.print("<td>"+rs.getString("manager")+"</td>");
-				out.print("<td>"+rs.getInt("salary")+"</td>");
+				out.print("<td>"+rs.getInt("author_id")+"</td>");
+				out.print("<td>"+rs.getString("author_name")+"</td>");
+				out.print("<td>"+rs.getString("author_desc")+"</td>");
 				out.print("</tr>");
 			}
 		}catch(Exception e){
